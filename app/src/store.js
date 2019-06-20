@@ -1,11 +1,16 @@
-import { createStore, combineReducers } from 'redux'
-import { colors, sort } from './reducers'
-import initialState from './initial-state'
+import { createStore } from 'redux'
+import reducer from './reducer'
 
+let initialState = {
 
-const storeFactory = (initialState = initialState) => {
+    todoData: [],
+    term: '',
+    filter: 'all'
+}
 
-    createStore(combineReducers({ colors, sort }), initialState)
+const storeFactory = () => {
+
+    return createStore(reducer, initialState)
 }
 
 export default storeFactory

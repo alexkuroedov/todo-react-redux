@@ -25,19 +25,19 @@ export default class TodoListItem extends Component {
                     className="todo-item-important-button"
                     onClick={onToggleImportant}
                 >
-                    <i class="material-icons circle">assistant_photo</i></span>
+                    <i className="material-icons circle">assistant_photo</i></span>
                 <span
-                    class={classNames}
+                    className={classNames}
                     onClick={onToggleDone}
     
                 >{label}
                 </span>
     
                 <span
-                    class="todo-item-delete-button secondary-content"
+                    className="todo-item-delete-button secondary-content"
                     onClick={onDeleted}
     
-                ><i class="material-icons">delete_forever</i></span>
+                ><i className="material-icons">delete_forever</i></span>
             </React.Fragment>
                     
         )

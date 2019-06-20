@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import * as actions from '../actions' 
+import * as actions from '../../actions' 
 
 import AppHeader from '../app-header/app-header'
 import SearchPanel from '../search-panel/search-panel'
@@ -128,7 +128,7 @@ class App extends Component {
         const visibleItems = this.filter(this.search(todoData, term), filter)
         const doneCount = todoData.filter((el) => el.done).length
         const todoCount = todoData.length - doneCount
-
+        console.log(this.props.state)
         return (
             <div className="container todo-app">
                 <AppHeader className="col ss12 ms4"toDo={todoCount} done={doneCount} />
