@@ -1,0 +1,26 @@
+
+.done{
+    text-decoration: line-through;
+}
+
+.important{
+    font-weight: bold;
+    color:#26a69a;
+}
+
+.todo-item-delete-button{
+    color:#F44336;
+    line-height: 40px;
+    cursor:pointer;
+}
+
+.todo-item-label{
+    display: inline-block;
+    line-height: 40px; 
+    margin-left: 25px;
+    width: 100%;
+}
+
+.todo-item-important-button{
+    cursor: pointer;
+}
