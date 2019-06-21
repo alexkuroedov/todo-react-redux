@@ -15,20 +15,21 @@ const mapDispatchToProps = (dispatch) => {
 
 
 const ItemAddForm = ({ state, onItemAdded }) => {
+    let _label = ''
+    let _input = ''
     const { todoData } = state
-    let label = ''
-
-    const maxId = todoData.reduce((maxId = 0, item) => {
+    const _maxId = todoData.reduce((maxId = 0, item) => {
         return (maxId > item.id) ? maxId : item.id
     })
-    const onLabelChange = (e) => {
-        label = e.target.value
-    }
 
+    const onLabelChange = (e) => {
+        _label = e.target.value
+    }
+    
     const onSubmit = (e) => {
         e.preventDefault()
-        onItemAdded(maxId, label)
-
+        onItemAdded(_maxId, _label)
+        _input.value=''
     }
     return (
         <form
@@ -36,6 +37,7 @@ const ItemAddForm = ({ state, onItemAdded }) => {
             onSubmit={onSubmit}
         >
             <input
+                ref={(input) => _input = input }
                 type="text"
                 className="form-control"
                 onChange={(e) => onLabelChange(e)}
