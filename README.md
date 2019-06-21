@@ -1,5 +1,5 @@
-# To-Do React app
-This application is written on React. 
+# To-Do React Redux app
+This is just todo application is written on React with Redux. 
 
 ## Run application
 First you'll need install node.js modules:
