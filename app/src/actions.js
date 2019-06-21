@@ -1,6 +1,5 @@
 import C from './constants'
 
-//action creaters for clearify code
 export const addItem = (label) => {
   let maxId = 100
 
@@ -35,33 +34,19 @@ export const onToggleDone = (id) => {
   }
 }
 
+export const onFilterChange = (filterName) => {
+  return {
+    type: C.SET_FILTER,
+    filterName
+  }
+}
 
-export const setTerm = () => ({ type: C.SET_TERM })
-export const setFilter = () => ({ type: C.SET_FILTER })
-export const doImportant = () => ({ type: C.DO_IMPORTANT })
-export const done = () => ({ type: C.DONE })
+export const onSearchChange = (e) => {
+  const term = e.target.value
+  return {
+    type: C.SET_TERM,
+    term
+  }
 
+}
 
-//action creaters for clearify code
-// export const inc = () => ({type: 'INC'})
-// export const dec = () => ({type: 'DEC'})
-// export const rnd = (payload) => {
-
-//   return  {
-//       type: 'RND',
-//       payload: Math.floor(Math.random() * 10)
-//     }
-// }
-
-// export const addItem = (number) => {
-//   let maxId = 100
-
-//   return {
-//     type: 'ADD',
-//     label:'common',
-//     important: false,
-//     done: false,
-//     id: maxId++,
-//     number:number
-//   }
-// }

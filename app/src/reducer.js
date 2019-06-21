@@ -48,21 +48,27 @@ const reducer = (state = initialState, action) => {
 
         case C.TOGGLE_IMPORTANT:
             newTodoData = state.todoData.map((item) => {
-                if(item.id === action.id){
-                    item.important = !item.important                    
+                if (item.id === action.id) {
+                    item.important = !item.important
                 }
                 return item
             })
             return { ...state, todoData: newTodoData }
         case C.TOGGLE_DONE:
             newTodoData = state.todoData.map((item) => {
-                if(item.id === action.id){
-                    item.done = !item.done                    
+                if (item.id === action.id) {
+                    item.done = !item.done
                 }
                 return item
             })
 
             return { ...state, todoData: newTodoData }
+
+        case C.SET_FILTER:
+            return { ...state, filter: action.filterName }
+
+        case C.SET_TERM:
+            return { ...state, term: action.term }
 
         default:
             return state
