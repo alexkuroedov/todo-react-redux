@@ -1,14 +1,12 @@
 import C from './constants'
 
-export const addItem = (label) => {
-  let maxId = 100
-
+export const onItemAdded = (maxId, label) => {
   return {
     type: C.ADD_ITEM,
     label,
     important: false,
     done: false,
-    id: maxId++,
+    id: ++maxId,
 
   }
 }

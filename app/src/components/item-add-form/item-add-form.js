@@ -1,42 +1,51 @@
-import React, { Component } from 'react'
-import './item-add-form.css' 
+import React from 'react'
+import './item-add-form.css'
 
-export default class ItemAddForm extends Component {
-    state = {
-        label: ''
-    }
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import * as actions from '../../actions'
 
-    onLabelChange = (e) => {
-        this.setState({
-            label: e.target.value
-        })
-    }
 
-    onSubmit = (e) => {
-        e.preventDefault()
-        this.props.onItemAdded(this.state.label)
-        this.setState({
-            label: ''
-        })
-    }
-    render() { 
-        return (
-            <form 
-                className="item-add-form"
-                onSubmit={this.onSubmit}
-            >
-                <input 
-                    type="text"
-                    className="form-control"
-                    onChange={this.onLabelChange}
-                    placeholder="add task"
-                    value={this.state.label}
-                />
-                <button className="btn btn-outline-secondary add">
-                   Add
-                </button>
-            </form>
-        );
-    }
+const mapStateToProps = (state) => ({ state: state })
+
+const mapDispatchToProps = (dispatch) => {
+    const { onItemAdded } = bindActionCreators(actions, dispatch)
+    return { onItemAdded: (maxId, label) => onItemAdded(maxId, label) }
 }
- 
+
+
+const ItemAddForm = ({ state, onItemAdded }) => {
+    const { todoData } = state
+    let label = ''
+
+    const maxId = todoData.reduce((maxId = 0, item) => {
+        return (maxId > item.id) ? maxId : item.id
+    })
+    const onLabelChange = (e) => {
+        label = e.target.value
+    }
+
+    const onSubmit = (e) => {
+        e.preventDefault()
+        onItemAdded(maxId, label)
+
+    }
+    return (
+        <form
+            className="item-add-form"
+            onSubmit={onSubmit}
+        >
+            <input
+                type="text"
+                className="form-control"
+                onChange={(e) => onLabelChange(e)}
+                placeholder="add task"
+            />
+            <button className="btn btn-outline-secondary add">
+                Add
+                </button>
+        </form>
+    );
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ItemAddForm)
