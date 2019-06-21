@@ -1,46 +1,67 @@
-import React, { Component } from 'react'
+import React from 'react'
 import './todo-list-item.css'
 
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import * as actions from '../../actions'
 
-export default class TodoListItem extends Component {
 
-    render = () => {
-        const { label, onDeleted,
-            onToggleImportant,
-            onToggleDone,
-            important, done } = this.props
+const mapStateToProps = (state) => {
+    return { state: state }
+}
 
-        let classNames = 'todo-item-label title'
-        if (done) {
-            classNames += ' done'
+const mapDispatchToProps = (dispatch) => {
+
+    const { onToggleImportant, onToggleDone, onDeleted } = bindActionCreators(actions, dispatch)
+
+    return {
+        onToggleImportant: (id) => {
+            onToggleImportant(id)
+         },
+        onToggleDone: (id) => {
+            onToggleDone(id)
+        },
+        onDeleted: (id) => {
+            onDeleted(id)
         }
-        if (important) {
-            classNames += ' important'
-        }
+    }
+}
 
-        return (
+const TodoListItem = ({ state, onToggleDone, onToggleImportant, onDeleted, ...props }) => {
 
-            <React.Fragment>
+
+    const { id, label, important, done } = props
+
+    let classNames = 'todo-item-label title'
+    if (done) {
+        classNames += ' done'
+    }
+    if (important) {
+        classNames += ' important'
+    }
+
+    return (
+
+            <li className="list-group-item collection-item avatar">
                 <span
                     className="todo-item-important-button"
-                    onClick={onToggleImportant}
+                    onClick={() => onToggleImportant(id)}
                 >
                     <i className="material-icons circle">assistant_photo</i></span>
                 <span
                     className={classNames}
-                    onClick={onToggleDone}
-    
+                    onClick={() => onToggleDone(id)}
                 >{label}
                 </span>
-    
+
                 <span
                     className="todo-item-delete-button secondary-content"
-                    onClick={onDeleted}
-    
+                    onClick={() => onDeleted(id)}
                 ><i className="material-icons">delete_forever</i></span>
-            </React.Fragment>
-                    
-        )
+            </li>
 
-    }
+    )
+
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodoListItem)

@@ -2,14 +2,17 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import App from './components/app/app'
-import storeFactory from './store'
+// import storeFactory from './store'
+import reducer from './reducer'
+import { createStore } from 'redux'
 
 
-let store = storeFactory()
+let store = createStore(reducer)
 
 ReactDOM.render(
     <Provider store={store}>
-        <App />
-    </Provider>, document.getElementById('root'))
+        <App store={store}/>
+    </Provider>
+    , document.getElementById('root'))
 
 //Todo React Context
